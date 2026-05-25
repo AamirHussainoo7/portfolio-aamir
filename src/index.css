@@ -41,6 +41,15 @@ html {
   }
 }
 
+/* Hide default cursor for custom DevCursor on desktop */
+@media (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
 @layer utilities {
   /* ─── Text effects ───────────────────────────── */
   .text-glow {

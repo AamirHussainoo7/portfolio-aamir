@@ -14,19 +14,21 @@ import { Credentials } from './components/sections/Credentials';
 import { EngineeringMindset } from './components/sections/EngineeringMindset';
 import { Contact } from './components/sections/Contact';
 import { SplashLoader } from './components/ui/SplashLoader';
+import { DevCursor } from './components/ui/DevCursor';
 
 export default function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
+      <DevCursor />
       {showSplash && <SplashLoader onComplete={() => setShowSplash(false)} />}
 
       <Navbar />
-      
+
       <main className="max-w-6xl mx-auto px-6 md:px-10 pt-8 pb-24 overflow-hidden">
         <Hero />
-        
+
         <div className="space-y-28">
           <section>
             <About />

@@ -203,9 +203,8 @@ const CodeTerminal = () => {
             <button
               key={i}
               onClick={() => { setCurrentSnippet(i); setVisibleLines(0); }}
-              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                i === currentSnippet ? 'bg-accent scale-125' : 'bg-white/20 hover:bg-white/40'
-              }`}
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === currentSnippet ? 'bg-accent scale-125' : 'bg-white/20 hover:bg-white/40'
+                }`}
             />
           ))}
         </div>
@@ -291,7 +290,7 @@ export const Hero = () => {
           </motion.div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-2 leading-[1.08]">
-            <motion.span 
+            <motion.span
               className="block text-foreground"
               initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -299,7 +298,7 @@ export const Hero = () => {
             >
               Muhammed
             </motion.span>
-            <motion.span 
+            <motion.span
               className="block text-gradient-accent"
               initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -315,13 +314,13 @@ export const Hero = () => {
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <p className="text-lg text-muted leading-relaxed mb-8 max-w-lg">
-              Full Stack Developer & <span className="text-foreground font-medium">AI Builder</span> crafting 
+              Full Stack Developer & <span className="text-foreground font-medium">AI Builder</span> crafting
               scalable web applications, intelligent systems, and modern user experiences.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <motion.a 
-                href="#projects" 
+              <motion.a
+                href="#projects"
                 className="btn-primary btn-glow text-center inline-flex items-center justify-center gap-2 group"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
@@ -329,8 +328,8 @@ export const Hero = () => {
                 View Projects
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </motion.a>
-              <motion.a 
-                href="#contact" 
+              <motion.a
+                href="#contact"
                 className="btn-outline text-center"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
