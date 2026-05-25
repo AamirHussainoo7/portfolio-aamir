@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { SectionHeading, Card } from '../ui/Shared';
-import { Terminal, Cpu, Sparkles } from 'lucide-react';
+import { Terminal, Cpu, Sparkles, GraduationCap } from 'lucide-react';
 
 export const About = () => {
   const pillars = [
@@ -24,26 +24,26 @@ export const About = () => {
   return (
     <div id="about">
       <SectionHeading 
-        title="Identity"
-        number="[ THE_BUILDER_PROFILE ]"
-        subtitle="I'm a B.Tech Computer Science student at Lovely Professional University, obsessed with how software survives at scale."
+        title="About Me"
+        number="Who I Am"
+        subtitle="B.Tech Computer Science student at Lovely Professional University, obsessed with how software survives at scale."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
         {pillars.map((pillar, i) => (
           <motion.div
             key={pillar.title}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.2 }}
+            transition={{ delay: i * 0.1, duration: 0.5 }}
           >
-            <Card className="h-full group">
-              <div className="mb-8 p-4 rounded-2xl bg-white/[0.03] w-fit group-hover:bg-blue-600 transition-colors">
-                <pillar.icon size={28} className="text-white" />
+            <Card className="h-full group p-7">
+              <div className="mb-5 p-3 rounded-xl bg-accent/10 w-fit group-hover:bg-accent/20 transition-colors duration-300">
+                <pillar.icon size={22} className="text-accent" />
               </div>
-              <h3 className="text-2xl font-black mb-4 uppercase tracking-tighter">{pillar.title}</h3>
-              <p className="text-muted-foreground leading-relaxed font-light">
+              <h3 className="text-lg font-bold mb-2">{pillar.title}</h3>
+              <p className="text-muted text-sm leading-relaxed">
                 {pillar.desc}
               </p>
             </Card>
@@ -52,30 +52,19 @@ export const About = () => {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="card-creative relative overflow-hidden"
+        className="card-glass-static p-7 flex flex-col md:flex-row gap-6 items-start md:items-center"
       >
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            <div className="md:col-span-4 border-r border-white/5 pr-12">
-               <span className="text-[10px] font-mono text-accent uppercase tracking-widest block mb-4">Current_Track</span>
-               <h3 className="text-3xl font-black uppercase tracking-tighter leading-tight">Lovely Professional University</h3>
-            </div>
-            <div className="md:col-span-8 flex flex-col md:flex-row justify-between gap-8 md:items-center">
-               <div className="space-y-1">
-                  <p className="text-xl font-light text-white/80">B.Tech in Computer Science & Engineering</p>
-                  <p className="text-sm font-mono text-white/30 uppercase tracking-widest whitespace-nowrap">Aug 2022 – Present</p>
-               </div>
-               <div className="text-right">
-                  <p className="text-[10px] font-mono text-white/30 uppercase tracking-[0.4em] mb-2">Academic_Performance</p>
-                  <p className="text-4xl font-black text-glow">7.55 <span className="text-sm font-light text-white/20">CGPA</span></p>
-               </div>
-            </div>
+        <div className="p-3 rounded-xl bg-accent/10 shrink-0">
+          <GraduationCap size={22} className="text-accent" />
         </div>
-        <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-           <Terminal size={120} />
+        <div className="flex-1">
+          <h3 className="text-xl font-bold mb-1">Lovely Professional University</h3>
+          <p className="text-muted text-sm">B.Tech in Computer Science & Engineering</p>
         </div>
+        <span className="text-sm text-muted font-mono whitespace-nowrap">Aug 2022 – 2026</span>
       </motion.div>
     </div>
   );

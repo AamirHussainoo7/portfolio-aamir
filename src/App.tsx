@@ -14,59 +14,51 @@ import { Credentials } from './components/sections/Credentials';
 import { EngineeringMindset } from './components/sections/EngineeringMindset';
 import { Contact } from './components/sections/Contact';
 import { SplashLoader } from './components/ui/SplashLoader';
-import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
+  const [showSplash, setShowSplash] = useState(true);
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black font-sans">
-      <AnimatePresence>
-        {loading && <SplashLoader onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
+    <div className="min-h-screen bg-background text-foreground font-sans">
+      {showSplash && <SplashLoader onComplete={() => setShowSplash(false)} />}
 
-      <div className="atmos-bg min-h-screen">
-        <Navbar />
-        
-        <main className="max-w-7xl mx-auto px-6 md:px-12 pt-12 pb-32 overflow-hidden">
-          <Hero />
-          
-          <div className="space-y-48">
-            <section id="about">
-              <About />
-            </section>
-
-            <section id="skills">
-              <Skills />
-            </section>
-
-            <section id="projects">
-              <Projects />
-            </section>
-
-            <section id="credentials">
-              <Credentials />
-            </section>
-
-            <section id="journey">
-              <Experience />
-            </section>
-
-            <section id="mindset">
-              <EngineeringMindset />
-            </section>
-
-            <section id="contact">
-              <Contact />
-            </section>
-          </div>
-        </main>
-
-        <Footer />
-      </div>
+      <Navbar />
       
-      {/* Global Grain Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <main className="max-w-6xl mx-auto px-6 md:px-10 pt-8 pb-24 overflow-hidden">
+        <Hero />
+        
+        <div className="space-y-28">
+          <section>
+            <About />
+          </section>
+
+          <section>
+            <Skills />
+          </section>
+
+          <section>
+            <Projects />
+          </section>
+
+          <section>
+            <Credentials />
+          </section>
+
+          <section>
+            <Experience />
+          </section>
+
+          <section>
+            <EngineeringMindset />
+          </section>
+
+          <section>
+            <Contact />
+          </section>
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }

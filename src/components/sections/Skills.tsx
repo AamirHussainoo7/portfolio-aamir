@@ -1,56 +1,73 @@
 import { motion } from 'motion/react';
-import { Container, SectionHeading, Badge } from '../ui/Shared';
+import { SectionHeading } from '../ui/Shared';
+import { Code2, Layout, Server, Database, Wrench, Sparkles } from 'lucide-react';
 
 export const Skills = () => {
   const skillGroups = [
     {
       label: "Languages",
+      icon: Code2,
       skills: ["JavaScript (ES6+)", "Python", "C++", "Java", "SQL"]
     },
     {
       label: "Frontend",
-      skills: ["React.js", "HTML", "CSS", "Tailwind CSS"]
+      icon: Layout,
+      skills: ["React.js", "HTML5", "CSS3", "Tailwind CSS"]
     },
     {
       label: "Backend",
-      skills: ["Node.js", "Express.js", "FastAPI", "Socket.io"]
+      icon: Server,
+      skills: ["Node.js", "Express.js", "Django REST", "FastAPI", "Socket.io"]
     },
     {
       label: "Databases",
-      skills: ["MongoDB", "MySQL", "PostgreSQL", "REST APIs"]
+      icon: Database,
+      skills: ["MongoDB", "MySQL", "PostgreSQL"]
     },
     {
       label: "Tools & DevOps",
+      icon: Wrench,
       skills: ["Git", "GitHub", "Docker", "AWS (EC2/S3)", "Postman", "Linux"]
+    },
+    {
+      label: "AI & APIs",
+      icon: Sparkles,
+      skills: ["OpenAI API", "REST APIs", "JWT Auth"]
     }
   ];
 
   return (
-    <div id="skills" className="space-y-24">
-      <SectionHeading 
-        title="Stack"
-        number="[ TECH_INVENTORY ]"
-        subtitle="A distilled ecosystem for rapid product development and systems architecture."
+    <div id="skills">
+      <SectionHeading
+        title="Tech Stack"
+        number="Skills"
+        subtitle="A curated toolkit for building scalable full-stack applications and AI-powered systems."
       />
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {skillGroups.map((group, i) => (
           <motion.div
             key={group.label}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="space-y-8"
+            transition={{ delay: i * 0.08, duration: 0.5 }}
+            className="card-gradient-border p-6 group"
           >
-            <h3 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.4em] pb-4 border-b border-white/5">{group.label}</h3>
-            <div className="grid grid-cols-1 gap-4">
-               {group.skills.map((skill) => (
-                <div key={skill} className="flex items-center justify-between group">
-                  <span className="text-2xl font-black text-white/50 group-hover:text-white group-hover:text-glow transition-all cursor-default">{skill}</span>
-                  <div className="h-px flex-grow bg-white/5 mx-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="text-[10px] font-mono text-white/5 group-hover:text-accent transition-colors tracking-tighter">v.STABLE</span>
-                </div>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="p-2 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors duration-300">
+                <group.icon size={16} className="text-accent" />
+              </div>
+              <h3 className="text-sm font-semibold tracking-wide">{group.label}</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="pill cursor-default"
+                >
+                  {skill}
+                </span>
               ))}
             </div>
           </motion.div>

@@ -1,7 +1,11 @@
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { SectionHeading } from '../ui/Shared';
+import { Briefcase } from 'lucide-react';
+import { useRef } from 'react';
 
 export const Experience = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const items = [
     {
       role: "Technical Consultant",
@@ -30,60 +34,57 @@ export const Experience = () => {
   ];
 
   return (
-    <div id="experience" className="relative pb-24">
+    <div id="experience" ref={containerRef}>
       <SectionHeading 
-        title="Journey"
-        number="[ CAREER_ARCHITECTURE ]"
-        subtitle="A chronological trace of technical contributions and system migrations."
+        title="Experience"
+        number="Journey"
+        subtitle="Professional experience and technical contributions."
       />
 
-      <div className="space-y-32">
+      <div className="space-y-6">
         {items.map((item, i) => (
           <motion.div
             key={item.company}
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: i * 0.1 }}
-            className="group relative pl-16 md:pl-24"
+            transition={{ duration: 0.5, delay: i * 0.15 }}
+            className="card-gradient-border p-7 md:p-9 group"
           >
-            {/* Timeline Line */}
-            <div className="absolute left-0 top-0 bottom-[-128px] w-px bg-white/10 group-last:bottom-0">
-               <motion.div 
-                 className="absolute top-0 left-0 w-px bg-blue-500 origin-top"
-                 initial={{ scaleY: 0 }}
-                 whileInView={{ scaleY: 1 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 1.5, delay: i * 0.2 }}
-               />
-            </div>
-
-            {/* Timeline Dot */}
-            <div className="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-white group-hover:bg-blue-500 transition-all group-hover:scale-150 shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
-            
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              <div className="lg:col-span-5">
-                <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.4em] mb-4 block">
-                  {item.period}
-                </span>
-                <h3 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4 group-hover:text-glow transition-all">
-                  {item.company}
-                </h3>
-                <p className="text-blue-500 font-bold uppercase tracking-[0.2em] text-xs">
-                  {item.role}
-                </p>
+            <div className="flex flex-col md:flex-row gap-6 md:gap-10">
+              {/* Left: Meta */}
+              <div className="md:w-[280px] shrink-0">
+                <div className="flex items-center gap-3 mb-3">
+                  <motion.div 
+                    className="p-2 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors duration-300"
+                    whileHover={{ rotate: 5 }}
+                  >
+                    <Briefcase size={16} className="text-accent" />
+                  </motion.div>
+                  <span className="text-xs text-muted font-mono">{item.period}</span>
+                </div>
+                <h3 className="text-xl font-bold tracking-tight mb-1 group-hover:text-accent transition-colors duration-300">{item.company}</h3>
+                <p className="text-sm font-medium text-accent/80">{item.role}</p>
               </div>
 
-              <div className="lg:col-span-7 pt-4">
-                <p className="text-xl text-muted-foreground font-light leading-relaxed mb-8">
+              {/* Right: Content */}
+              <div className="flex-1 border-l border-white/[0.06] pl-6 md:pl-10">
+                <p className="text-muted text-sm leading-relaxed mb-5">
                   {item.description}
                 </p>
-                <ul className="space-y-4">
+                <ul className="space-y-3">
                   {item.achievements.map((achievement, idx) => (
-                    <li key={idx} className="flex gap-4 text-sm text-white/70 font-light leading-relaxed">
-                      <span className="text-blue-500 font-mono mt-1">/</span>
+                    <motion.li 
+                      key={idx} 
+                      className="flex gap-3 text-sm text-foreground/70 leading-relaxed"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + idx * 0.08 }}
+                    >
+                      <span className="text-accent mt-1 shrink-0">›</span>
                       {achievement}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               </div>
