@@ -3,41 +3,11 @@ import { Mail, Github, Linkedin, ArrowUpRight, Send } from 'lucide-react';
 import { ParticleBackground } from '../ui/ParticleBackground';
 import { useRef, useState, useEffect } from 'react';
 
-/* Typewriter heading */
-const TypewriterHeading = () => {
-  const text = "together";
-  const [displayed, setDisplayed] = useState('');
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
-      { threshold: 0.5 }
-    );
-    const el = document.getElementById('contact-heading');
-    if (el) observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < text.length) {
-        setDisplayed(text.slice(0, i + 1));
-        i++;
-      } else clearInterval(interval);
-    }, 80);
-    return () => clearInterval(interval);
-  }, [started]);
-
-  return (
-    <h2 id="contact-heading" className="text-4xl md:text-6xl font-bold tracking-tight mb-5">
-      Let's work <span className="text-gradient-accent">{displayed || '\u00A0'}</span>
-      <span className="cursor-blink text-accent text-3xl">|</span>
-    </h2>
-  );
-};
+const ContactHeading = () => (
+  <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-5">
+    Let's work <span className="text-gradient-accent">together</span>
+  </h2>
+);
 
 /* Magnetic contact card */
 const MagneticCard = ({ link, i }: { link: any; i: number }) => {
@@ -149,7 +119,7 @@ export const Contact = () => {
           <span className="text-xs font-medium text-accent">Open to opportunities</span>
         </motion.div>
 
-        <TypewriterHeading />
+        <ContactHeading />
         <p className="text-muted text-base max-w-md mx-auto leading-relaxed">
           I'm always open to discussing new projects, creative ideas, or opportunities to be part of something great.
         </p>

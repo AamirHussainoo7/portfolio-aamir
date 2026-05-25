@@ -359,19 +359,6 @@ export const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Stats counters */}
-      <motion.div
-        className="absolute bottom-8 left-0 right-0 z-10"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-      >
-        <div className="flex justify-center gap-12 md:gap-20">
-          <AnimatedCounter end={3} suffix="+" label="Live Projects" />
-          <AnimatedCounter end={10} suffix="+" label="Technologies" />
-          <AnimatedCounter end={2} suffix="" label="Internships" />
-        </div>
-      </motion.div>
     </section>
   );
 };
