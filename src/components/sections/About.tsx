@@ -26,7 +26,7 @@ export const About = () => {
       <SectionHeading 
         title="About Me"
         number="Who I Am"
-        subtitle="B.Tech Computer Science student at Lovely Professional University, obsessed with how software survives at scale."
+        subtitle="I enjoy building things that live on the internet products that are clean, useful, and feel good to use. I love solving problems, improving systems, and turning ideas into experiences people actually enjoy."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
