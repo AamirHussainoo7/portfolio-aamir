@@ -16,16 +16,16 @@ export const SplashLoader = ({ onComplete }: { onComplete: () => void }) => {
       '> status: ready ✓',
     ];
 
-    // Original timing restored
-    const t1 = setTimeout(() => { setLines([bootLines[0]]); setProgress(20); }, 200);
-    const t2 = setTimeout(() => { setLines(prev => [...prev, bootLines[1]]); setProgress(40); }, 500);
-    const t3 = setTimeout(() => { setLines(prev => [...prev, bootLines[2]]); setProgress(60); }, 800);
-    const t4 = setTimeout(() => { setLines(prev => [...prev, bootLines[3]]); setProgress(80); }, 1100);
-    const t5 = setTimeout(() => { setLines(prev => [...prev, bootLines[4]]); setProgress(100); }, 1400);
+    // Slowed-down timing
+    const t1 = setTimeout(() => { setLines([bootLines[0]]); setProgress(20); }, 300);
+    const t2 = setTimeout(() => { setLines(prev => [...prev, bootLines[1]]); setProgress(40); }, 750);
+    const t3 = setTimeout(() => { setLines(prev => [...prev, bootLines[2]]); setProgress(60); }, 1200);
+    const t4 = setTimeout(() => { setLines(prev => [...prev, bootLines[3]]); setProgress(80); }, 1650);
+    const t5 = setTimeout(() => { setLines(prev => [...prev, bootLines[4]]); setProgress(100); }, 2100);
 
-    const t6 = setTimeout(() => setShowName(true), 1800);
-    const t7 = setTimeout(() => setVisible(false), 3200);
-    const t8 = setTimeout(() => onComplete(), 3600);
+    const t6 = setTimeout(() => setShowName(true), 2700);
+    const t7 = setTimeout(() => setVisible(false), 4200);
+    const t8 = setTimeout(() => onComplete(), 4600);
 
     return () => {
       [t1, t2, t3, t4, t5, t6, t7, t8].forEach(clearTimeout);
