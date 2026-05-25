@@ -5,6 +5,7 @@ export const SplashLoader = ({ onComplete }: { onComplete: () => void }) => {
   const [lines, setLines] = useState<string[]>([]);
   const [showName, setShowName] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const bootLines = [
@@ -15,17 +16,14 @@ export const SplashLoader = ({ onComplete }: { onComplete: () => void }) => {
       '> status: ready ✓',
     ];
 
-    // Type lines one by one
-    const t1 = setTimeout(() => setLines([bootLines[0]]), 200);
-    const t2 = setTimeout(() => setLines(prev => [...prev, bootLines[1]]), 500);
-    const t3 = setTimeout(() => setLines(prev => [...prev, bootLines[2]]), 800);
-    const t4 = setTimeout(() => setLines(prev => [...prev, bootLines[3]]), 1100);
-    const t5 = setTimeout(() => setLines(prev => [...prev, bootLines[4]]), 1400);
+    // Original timing restored
+    const t1 = setTimeout(() => { setLines([bootLines[0]]); setProgress(20); }, 200);
+    const t2 = setTimeout(() => { setLines(prev => [...prev, bootLines[1]]); setProgress(40); }, 500);
+    const t3 = setTimeout(() => { setLines(prev => [...prev, bootLines[2]]); setProgress(60); }, 800);
+    const t4 = setTimeout(() => { setLines(prev => [...prev, bootLines[3]]); setProgress(80); }, 1100);
+    const t5 = setTimeout(() => { setLines(prev => [...prev, bootLines[4]]); setProgress(100); }, 1400);
 
-    // Show name
     const t6 = setTimeout(() => setShowName(true), 1800);
-
-    // Fade out and complete
     const t7 = setTimeout(() => setVisible(false), 3200);
     const t8 = setTimeout(() => onComplete(), 3600);
 
@@ -54,6 +52,15 @@ export const SplashLoader = ({ onComplete }: { onComplete: () => void }) => {
               </motion.p>
             ))}
             <span className="inline-block w-2 h-4 bg-blue-500 animate-pulse mt-1" />
+            {/* Progress bar */}
+            <div className="mt-4 w-full h-[2px] bg-white/[0.06] rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-accent to-accent-cyan"
+                initial={{ width: '0%' }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+              />
+            </div>
           </div>
         ) : (
           <div className="text-center">

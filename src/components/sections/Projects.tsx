@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 import { SectionHeading } from '../ui/Shared';
 import { useRef, type MouseEvent as ReactMouseEvent } from 'react';
 
@@ -7,8 +7,8 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [3, -3]), { stiffness: 200, damping: 30 });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-3, 3]), { stiffness: 200, damping: 30 });
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [3, -3]), { stiffness: 80, damping: 35 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-3, 3]), { stiffness: 80, damping: 35 });
 
   const handleMouse = (e: ReactMouseEvent) => {
     if (!ref.current) return;
@@ -23,15 +23,15 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.7, delay: index * 0.1, type: 'spring', stiffness: 80 }}
       style={{ rotateX, rotateY, transformPerspective: 1200 }}
       onMouseMove={handleMouse}
       onMouseLeave={handleLeave}
     >
-      <div className={`card-gradient-border overflow-hidden flex flex-col ${
+      <div className={`relative card-gradient-border shimmer-border overflow-hidden flex flex-col ${
         isReversed ? 'md:flex-row-reverse' : 'md:flex-row'
       }`}>
         {/* Image */}
@@ -40,7 +40,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
             <img 
               src={project.image} 
               alt={project.title}
-              className="w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700"
+              className="w-full h-full object-cover opacity-40 group-hover:opacity-70 group-hover:scale-110 transition-all duration-700"
               referrerPolicy="no-referrer"
             />
             <div className={`absolute inset-0 ${
@@ -54,7 +54,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
           {/* Floating project number */}
           <motion.div 
             className="absolute top-4 left-4 z-10 px-3 py-1.5 rounded-lg bg-accent/10 border border-accent/20 backdrop-blur-sm"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.1, rotate: 5 }}
           >
             <span className="text-xs font-mono text-accent font-bold">0{index + 1}</span>
           </motion.div>
@@ -84,22 +84,21 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
             >
               {project.tagline}
             </motion.p>
-            <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">{project.title}</h3>
-            <p className="text-muted text-sm leading-relaxed max-w-lg">
-              {project.description}
-            </p>
+            <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-3 hover-gradient-text">{project.title}</h3>
+            <p className="text-muted text-sm leading-relaxed max-w-lg">{project.description}</p>
           </div>
 
-          {/* Tech Stack */}
+          {/* Tech Stack — wave glow on hover */}
           <div className="flex flex-wrap gap-2 mb-5">
             {project.stack.map((tech: string, techIdx: number) => (
               <motion.span 
                 key={tech} 
-                className="px-2.5 py-1 rounded-lg text-[11px] font-medium bg-accent/8 border border-accent/15 text-accent/90"
+                className="pill-glow"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3 + techIdx * 0.05 }}
+                transition={{ delay: 0.3 + techIdx * 0.06, type: 'spring', stiffness: 200 }}
+                whileHover={{ scale: 1.1, y: -2 }}
               >
                 {tech}
               </motion.span>
@@ -110,7 +109,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
           <div className="flex flex-wrap gap-x-6 gap-y-2 mb-5">
             {project.features.map((feature: any) => (
               <div key={feature.label} className="flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-accent/60" />
+                <span className="w-1.5 h-1.5 rounded-full bg-accent/60 animate-pulse-glow" />
                 <span className="text-xs text-muted">{feature.value}</span>
               </div>
             ))}
@@ -128,7 +127,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-cyan transition-colors duration-200 w-fit group"
-              whileHover={{ x: 3 }}
+              whileHover={{ x: 5 }}
             >
               Live Demo <ExternalLink size={14} className="group-hover:rotate-12 transition-transform" />
             </motion.a>

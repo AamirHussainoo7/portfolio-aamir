@@ -1,10 +1,16 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { SectionHeading } from '../ui/Shared';
+import { SpotlightCard } from '../ui/SpotlightCard';
 import { Briefcase } from 'lucide-react';
 import { useRef } from 'react';
 
 export const Experience = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const items = [
     {
@@ -41,56 +47,81 @@ export const Experience = () => {
         subtitle="Professional experience and technical contributions."
       />
 
-      <div className="space-y-6">
-        {items.map((item, i) => (
+      <div className="relative">
+        {/* Animated vertical timeline line */}
+        <div className="absolute left-6 md:left-8 top-0 bottom-0 w-[2px] bg-white/[0.04]">
           <motion.div
-            key={item.company}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.15 }}
-            className="card-gradient-border p-7 md:p-9 group"
-          >
-            <div className="flex flex-col md:flex-row gap-6 md:gap-10">
-              {/* Left: Meta */}
-              <div className="md:w-[280px] shrink-0">
-                <div className="flex items-center gap-3 mb-3">
-                  <motion.div 
-                    className="p-2 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors duration-300"
-                    whileHover={{ rotate: 5 }}
-                  >
-                    <Briefcase size={16} className="text-accent" />
-                  </motion.div>
-                  <span className="text-xs text-muted font-mono">{item.period}</span>
-                </div>
-                <h3 className="text-xl font-bold tracking-tight mb-1 group-hover:text-accent transition-colors duration-300">{item.company}</h3>
-                <p className="text-sm font-medium text-accent/80">{item.role}</p>
+            className="w-full bg-gradient-to-b from-accent to-accent-cyan rounded-full"
+            style={{ height: lineHeight }}
+          />
+        </div>
+
+        <div className="space-y-8 relative">
+          {items.map((item, i) => (
+            <motion.div
+              key={item.company}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.15, type: 'spring', stiffness: 100 }}
+              className="relative pl-16 md:pl-20"
+            >
+              {/* Timeline dot */}
+              <div className="absolute left-[18px] md:left-[26px] top-9 z-10">
+                <div className="w-4 h-4 rounded-full bg-accent border-4 border-background timeline-dot" />
               </div>
 
-              {/* Right: Content */}
-              <div className="flex-1 border-l border-white/[0.06] pl-6 md:pl-10">
-                <p className="text-muted text-sm leading-relaxed mb-5">
-                  {item.description}
-                </p>
-                <ul className="space-y-3">
-                  {item.achievements.map((achievement, idx) => (
-                    <motion.li 
-                      key={idx} 
-                      className="flex gap-3 text-sm text-foreground/70 leading-relaxed"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + idx * 0.08 }}
-                    >
-                      <span className="text-accent mt-1 shrink-0">›</span>
-                      {achievement}
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+              <SpotlightCard tilt tiltAmount={2} spotlightColor="rgba(59, 130, 246, 0.06)">
+                <div className="p-7 md:p-9 group">
+                  <div className="flex flex-col md:flex-row gap-6 md:gap-10">
+                    {/* Meta */}
+                    <div className="md:w-[250px] shrink-0">
+                      <div className="flex items-center gap-3 mb-3">
+                        <motion.div 
+                          className="p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20"
+                          whileHover={{ rotate: 10, scale: 1.15 }}
+                          transition={{ type: 'spring', stiffness: 300 }}
+                        >
+                          <Briefcase size={16} className="text-accent" />
+                        </motion.div>
+                        <span className="text-xs text-muted font-mono px-2 py-1 rounded-md bg-white/[0.04]">{item.period}</span>
+                      </div>
+                      <h3 className="text-xl font-bold tracking-tight mb-1 hover-gradient-text">{item.company}</h3>
+                      <p className="text-sm font-medium text-accent/80">{item.role}</p>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 border-l border-white/[0.06] pl-6 md:pl-10">
+                      <p className="text-muted text-sm leading-relaxed mb-5">{item.description}</p>
+                      <ul className="space-y-3">
+                        {item.achievements.map((achievement, idx) => (
+                          <motion.li 
+                            key={idx} 
+                            className="flex gap-3 text-sm text-foreground/70 leading-relaxed"
+                            initial={{ opacity: 0, x: -15 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 + idx * 0.1, type: 'spring', stiffness: 150 }}
+                          >
+                            <motion.span 
+                              className="text-accent mt-1 shrink-0"
+                              whileInView={{ scale: [0, 1.3, 1] }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.4 + idx * 0.1 }}
+                            >
+                              ›
+                            </motion.span>
+                            {achievement}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </SpotlightCard>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );
