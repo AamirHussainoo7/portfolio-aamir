@@ -1,20 +1,60 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🌐 Aamir Portfolio Website
 
-# Run and deploy your AI Studio app
+A modern and responsive developer portfolio website built to showcase my projects, skills, experience, and achievements as a Full Stack & Backend Developer.
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/6b261644-6270-431c-aa82-4f86c5c39fbe
+## 🚀 Features
 
-## Run Locally
+- Modern & Responsive UI
+- Smooth Animations
+- Projects Showcase
+- Skills & Tech Stack Section
+- Contact Form
+- Mobile Friendly Design
+- Fast Performance
 
-**Prerequisites:**  Node.js
+---
 
+## 🛠 Tech Stack
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+`React` `TypeScript` `TailwindCSS` `Vite`
+
+---
+
+## 📸 Preview
+
+<p align="center">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop" width="700"/>
+</p>
+
+---
+
+## 🔗 Live Demo
+
+🌍 https://portfolio-aamir.vercel.app/
+
+---
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/AamirHussainoo7/portfolio-aamir.git
+
+cd portfolio-aamir
+
+npm install
+
+npm run dev
+```
+
+---
+
+## 📬 Contact
+
+- LinkedIn: https://www.linkedin.com/in/md-aamir-hussain07/
+- Email: aamithussain.786@gmail.com
+
+---
+
+⭐ If you like this project, give it a star on GitHub!
